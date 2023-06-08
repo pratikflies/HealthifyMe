@@ -199,8 +199,6 @@ class App {
       this.lat = this.#mapEvent.latlng.lat;
       this.lng = this.#mapEvent.latlng.lng;
     }
-    if (this.#flag == 1) this._deleteWorkoutByObject(this.#workoutEdit);
-    console.log(this.lat, this.lng);
     let workout;
 
     //If workout is Running, create Running object
@@ -235,6 +233,8 @@ class App {
         elevation
       );
     }
+    if (this.#flag == 1) this._deleteWorkoutByObject(this.#workoutEdit);
+
     //Add the new object to the workout array
     this.#workouts.push(workout);
 
@@ -432,7 +432,6 @@ class App {
 
   _deleteWorkoutByObject(workout) {
     // Find the clicked workout element and the index of the workout in the array
-    console.log('Hello');
     const clickedId = workout.id;
     const index = this.#workouts.findIndex(function (el) {
       return el.id === clickedId;
@@ -457,10 +456,8 @@ class App {
       })
       .remove();
 
-    console.log('3');
     // Remove the workout element from the page
-    const el = document.querySelector(`[data-id="${clickedId}"]`);
-    el.remove();
+    document.querySelector(`[data-id="${clickedId}"]`).remove();
     this.#flag = 0;
   }
 
@@ -476,12 +473,10 @@ class App {
     if (workout.type === 'running') inputCadence.value = workout.cadence;
     if (workout.type === 'cycling')
       inputElevation.value = workout.elevationGain;
-    console.log(workout);
     this.lat = workout.coords[0];
     this.lng = workout.coords[1];
     this.#workoutEdit = workout;
     this.#flag = 1;
-    console.log('1');
   }
 }
 
