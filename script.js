@@ -373,6 +373,7 @@ class App {
 
   _getLocalStorage() {
     /*parsing back the string after getting it using key*/
+    //upon parsing, we get an array consisting of all the elements
     const data = JSON.parse(localStorage.getItem('workout'));
 
     if (!data) return;
